@@ -1,0 +1,29 @@
+openapi: "3.0.1"
+info:
+  title: "Sample Proof of Concept with Dev Portal"
+  description: "This is an example of API Dev portal."
+  version: 1.0.1
+servers:
+  - url: "https://1bpvqxwozb.execute-api.us-east-1.amazonaws.com"
+
+paths:
+  /apply:
+    get:
+      responses:
+        default:
+          description: "Default response for GET /apply"
+
+  /example:
+    get:
+      responses:
+        '200':
+          description: OK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []
