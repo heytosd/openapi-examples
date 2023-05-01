@@ -6,15 +6,27 @@ info:
 servers:
   - url: "https://1bpvqxwozb.execute-api.us-east-1.amazonaws.com"
 
+tags: 
+  - name: apply
+    description: Apply only
+  - name: echo
+    description: Echo api
+
 paths:
   /apply:
     get:
+      tags:
+        - apply
+      summary: Apply operation summary
+      description: Apply operation
       responses:
         default:
           description: "Default response for GET /apply"
           
   /echo:
     get:
+      tags: 
+        - echo
       responses:
         '200':
           description: OK
@@ -23,6 +35,8 @@ paths:
               schema:
                 type: string
     post:
+      tags: 
+        - echo    
       summary: Echoes back to supplied input
       requestBody:
         required: true
@@ -39,6 +53,8 @@ paths:
                 type: string
   /echo/{echoId}:
     delete:
+      tags: 
+        - echo    
       summary: Deletes an echo specified by echo Id
       parameters:
         - in: path
