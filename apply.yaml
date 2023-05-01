@@ -1,8 +1,8 @@
-openapi: "3.0.1"
+openapi: 3.0.0
 info:
-  title: "Sample Proof of Concept with Dev Portal"
+  title: portal-poc
   description: "This is an example of API Dev portal."
-  version: 1.0.1
+  version: '1.0'
 servers:
   - url: "https://1bpvqxwozb.execute-api.us-east-1.amazonaws.com"
 
@@ -12,18 +12,64 @@ paths:
       responses:
         default:
           description: "Default response for GET /apply"
-
-  /example:
+          
+  /echo:
     get:
       responses:
         '200':
           description: OK
+          content:
+            application/text:
+              schema:
+                type: string
+    post:
+      summary: Echoes back to supplied input
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Echo'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/text:
+              schema:
+                type: string
+  /echo/{echoId}:
+    delete:
+      summary: Deletes an echo specified by echo Id
+      parameters:
+        - in: path
+          name: echoId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/text:
+              schema:
+                type: string
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+    
+    
+  schemas:
+    Echo:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        
 
 security:
   - bearerAuth: []
